@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="FileCorrectedCopyResult" type="{http://www.fmc.gov/ServconWebServices/}ServiceContractFiling"/>
+ *         &lt;element name="FileCorrectedCopyResult" type="{http://www.fmc.gov/ServconWebServices/}ServiceContractFiling" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "FileCorrectedCopyResponse")
 public class FileCorrectedCopyResponse {
 
-    @XmlElement(name = "FileCorrectedCopyResult", required = true)
+    @XmlElement(name = "FileCorrectedCopyResult")
     protected ServiceContractFiling fileCorrectedCopyResult;
 
     /**

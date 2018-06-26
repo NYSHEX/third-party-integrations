@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.fmc.gov/ServconWebServices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.fmc.gov/ServconWebServices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.fmc.gov/ServconWebServices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.fmc.gov/ServconWebServices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.fmc.gov/ServconWebServices/">
-      <s:element name="FileNotice">
+      <s:element name="FileContract">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="FileData" type="s:base64Binary" />
             <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="OrgNum" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="ConNum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AmdNum" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="EffDate" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="FileNoticeResponse">
+      <s:element name="FileContractResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="FileNoticeResult" type="tns:ServiceContractFiling" />
+            <s:element minOccurs="0" maxOccurs="1" name="FileContractResult" type="tns:ServiceContractFiling" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -66,37 +67,17 @@
       <s:element name="FileCorrectedCopyResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="FileCorrectedCopyResult" type="tns:ServiceContractFiling" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="FileContract">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="FileData" type="s:base64Binary" />
-            <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="OrgNum" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="ConNum" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="AmdNum" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="EffDate" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="FileContractResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="FileContractResult" type="tns:ServiceContractFiling" />
+            <s:element minOccurs="0" maxOccurs="1" name="FileCorrectedCopyResult" type="tns:ServiceContractFiling" />
           </s:sequence>
         </s:complexType>
       </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="FileNoticeSoapIn">
-    <wsdl:part name="parameters" element="tns:FileNotice" />
+  <wsdl:message name="FileContractSoapIn">
+    <wsdl:part name="parameters" element="tns:FileContract" />
   </wsdl:message>
-  <wsdl:message name="FileNoticeSoapOut">
-    <wsdl:part name="parameters" element="tns:FileNoticeResponse" />
+  <wsdl:message name="FileContractSoapOut">
+    <wsdl:part name="parameters" element="tns:FileContractResponse" />
   </wsdl:message>
   <wsdl:message name="FileCorrectedCopySoapIn">
     <wsdl:part name="parameters" element="tns:FileCorrectedCopy" />
@@ -104,31 +85,20 @@
   <wsdl:message name="FileCorrectedCopySoapOut">
     <wsdl:part name="parameters" element="tns:FileCorrectedCopyResponse" />
   </wsdl:message>
-  <wsdl:message name="FileContractSoapIn">
-    <wsdl:part name="parameters" element="tns:FileContract" />
-  </wsdl:message>
-  <wsdl:message name="FileContractSoapOut">
-    <wsdl:part name="parameters" element="tns:FileContractResponse" />
-  </wsdl:message>
   <wsdl:portType name="SERVCONWebServiceSoap">
-    <wsdl:operation name="FileNotice">
-      <wsdl:input message="tns:FileNoticeSoapIn" />
-      <wsdl:output message="tns:FileNoticeSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="FileCorrectedCopy">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br&gt;&lt;b&gt;Using SERVCON Web Services&lt;/b&gt;&lt;br&gt; &lt;br&gt;Follow these steps if you are using Visual Studio.NET.&lt;br&gt;&lt;br&gt; 1.  Add https://servcon.fmc.gov/SERVCONWebService/SERVCONWebService.asmx to your project as a Web Reference&lt;br&gt;2.  Create a proxy class for the Web Service &lt;br&gt;3.  Instantiate a new ServiceContractFiling object&lt;br&gt;4.  Call the appropriate method with the specified arguments and assign the results to the ServiceContractFiling object&lt;br&gt;5.  The ServiceContractFiling object will contain a confirmation number if successful, warnings, and/or error messages&lt;br&gt; &lt;br&gt;Example C# code (Project's name is SERVCONWebServiceExample):&lt;br&gt;&lt;br&gt; &lt;green&gt;// create the proxy class for the Web Service&lt;/green&gt; &lt;br&gt;  gov.fmc.servconbeta.SERVCONWebService ProxySERVCON = new SERVCONWebServiceExample.gov.fmc.servconbeta.SERVCONWebService();&lt;br&gt;&lt;br&gt; // instantiate a new ServiceContractFiling object&lt;br&gt; gov.fmc.servconbeta.ServiceContractFiling filing = new SERVCONWebServiceExample.gov.fmc.servconbeta.ServiceContractFiling();&lt;br&gt; &lt;br&gt;  // prepare arguments for FileContract method&lt;br&gt;  // note: all arguments are string values, except the contents of file must be sent as a byte array &lt;br&gt;&lt;br&gt;  // get uploaded (posted) file&lt;br&gt;  HttpPostedFile userFile = uploadedFiles[0]; &lt;br&gt;&lt;br&gt; // get size of uploaded file &lt;br&gt;  int FileSize = userFile.ContentLength;&lt;br&gt; byte[] FileData = new Byte[FileSize]; &lt;br&gt;  userFile.InputStream.Read(FileData,0,FileSize); &lt;br&gt;&lt;br&gt;  // get other arguments from post data&lt;br&gt;  string ConNum = Request.Form["CN1".ToString()]; &lt;br&gt;  string OrgNum = Request.Form["ON1".ToString()];&lt;br&gt;  string AmdNum = Request.Form["AN1".ToString()];&lt;br&gt;  string EffDate = Request.Form["ED1".ToString()]; // YYYYMMDD format&lt;br&gt; string FileName = userFile.FileName.ToString();&lt;br&gt;  &lt;br&gt;  // call the method with appropriate arguments and assign results &lt;br&gt;  filing = ProxySERVCON.FileContract(FileData,FileName,OrgNum, ConNum, AmdNum, EffDate, UserName );&lt;br&gt;&lt;br&gt; // do something with the results&lt;br&gt; // note: if there are any errors the confirmation number will be &lt;b&gt;'Error'&lt;/b&gt; &lt;br&gt; Response.Write("Confirmation Number is " + filing.ConfirmNum );&lt;br&gt; &lt;br&gt; // the filing object's errCodes will be 0 if no errors, 1 if there are errors, and -1 for warnings against possible typos &lt;br&gt; // if there are errors or warnings, the corresponding errMsg string will give an explanation.  &lt;br&gt; &lt;br&gt;  // e.g.  here we check if there is a warning about the Org Number &lt;br&gt; if (filing.errCodeOrgNum == -1 )  // there is a warning about the org number &lt;br&gt; { Reponse.Write(filing.errMsgOrgNum); } &lt;br&gt; </wsdl:documentation>
-      <wsdl:input message="tns:FileCorrectedCopySoapIn" />
-      <wsdl:output message="tns:FileCorrectedCopySoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="FileContract">
       <wsdl:input message="tns:FileContractSoapIn" />
       <wsdl:output message="tns:FileContractSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="FileCorrectedCopy">
+      <wsdl:input message="tns:FileCorrectedCopySoapIn" />
+      <wsdl:output message="tns:FileCorrectedCopySoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="SERVCONWebServiceSoap" type="tns:SERVCONWebServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="FileNotice">
-      <soap:operation soapAction="http://www.fmc.gov/ServconWebServices/FileNotice" style="document" />
+    <wsdl:operation name="FileContract">
+      <soap:operation soapAction="http://www.fmc.gov/ServconWebServices/FileContract" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -145,20 +115,11 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FileContract">
-      <soap:operation soapAction="http://www.fmc.gov/ServconWebServices/FileContract" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="SERVCONWebServiceSoap12" type="tns:SERVCONWebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="FileNotice">
-      <soap12:operation soapAction="http://www.fmc.gov/ServconWebServices/FileNotice" style="document" />
+    <wsdl:operation name="FileContract">
+      <soap12:operation soapAction="http://www.fmc.gov/ServconWebServices/FileContract" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -175,22 +136,13 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FileContract">
-      <soap12:operation soapAction="http://www.fmc.gov/ServconWebServices/FileContract" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="SERVCONWebService">
     <wsdl:port name="SERVCONWebServiceSoap" binding="tns:SERVCONWebServiceSoap">
-      <soap:address location="https://servcon.fmc.gov/SERVCONWebService/SERVCONWebService.asmx" />
+      <soap:address location="https://servconwebservicetest.fmc.gov/SERVCONWebservice.asmx" />
     </wsdl:port>
     <wsdl:port name="SERVCONWebServiceSoap12" binding="tns:SERVCONWebServiceSoap12">
-      <soap12:address location="https://servcon.fmc.gov/SERVCONWebService/SERVCONWebService.asmx" />
+      <soap12:address location="https://servconwebservicetest.fmc.gov/SERVCONWebservice.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -29,16 +29,17 @@ public interface SERVCONWebServiceSoap {
      * @param orgNum
      * @param effDate
      * @param fileData
+     * @param amdNum
      * @param conNum
      * @param userName
      * @return
      *     returns com.nyshex.servcon.service.ServiceContractFiling
      */
-    @WebMethod(operationName = "FileNotice", action = "http://www.fmc.gov/ServconWebServices/FileNotice")
-    @WebResult(name = "FileNoticeResult", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
-    @RequestWrapper(localName = "FileNotice", targetNamespace = "http://www.fmc.gov/ServconWebServices/", className = "com.nyshex.servcon.service.FileNotice")
-    @ResponseWrapper(localName = "FileNoticeResponse", targetNamespace = "http://www.fmc.gov/ServconWebServices/", className = "com.nyshex.servcon.service.FileNoticeResponse")
-    public ServiceContractFiling fileNotice(
+    @WebMethod(operationName = "FileContract", action = "http://www.fmc.gov/ServconWebServices/FileContract")
+    @WebResult(name = "FileContractResult", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
+    @RequestWrapper(localName = "FileContract", targetNamespace = "http://www.fmc.gov/ServconWebServices/", className = "com.nyshex.servcon.service.FileContract")
+    @ResponseWrapper(localName = "FileContractResponse", targetNamespace = "http://www.fmc.gov/ServconWebServices/", className = "com.nyshex.servcon.service.FileContractResponse")
+    public ServiceContractFiling fileContract(
         @WebParam(name = "FileData", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
         byte[] fileData,
         @WebParam(name = "FileName", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
@@ -47,13 +48,14 @@ public interface SERVCONWebServiceSoap {
         String orgNum,
         @WebParam(name = "ConNum", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
         String conNum,
+        @WebParam(name = "AmdNum", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
+        String amdNum,
         @WebParam(name = "EffDate", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
         String effDate,
         @WebParam(name = "UserName", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
         String userName);
 
     /**
-     * <br><b>Using SERVCON Web Services</b><br> <br>Follow these steps if you are using Visual Studio.NET.<br><br> 1.  Add https://servcon.fmc.gov/SERVCONWebService/SERVCONWebService.asmx to your project as a Web Reference<br>2.  Create a proxy class for the Web Service <br>3.  Instantiate a new ServiceContractFiling object<br>4.  Call the appropriate method with the specified arguments and assign the results to the ServiceContractFiling object<br>5.  The ServiceContractFiling object will contain a confirmation number if successful, warnings, and/or error messages<br> <br>Example C# code (Project's name is SERVCONWebServiceExample):<br><br> <green>// create the proxy class for the Web Service</green> <br>  gov.fmc.servconbeta.SERVCONWebService ProxySERVCON = new SERVCONWebServiceExample.gov.fmc.servconbeta.SERVCONWebService();<br><br> // instantiate a new ServiceContractFiling object<br> gov.fmc.servconbeta.ServiceContractFiling filing = new SERVCONWebServiceExample.gov.fmc.servconbeta.ServiceContractFiling();<br> <br>  // prepare arguments for FileContract method<br>  // note: all arguments are string values, except the contents of file must be sent as a byte array <br><br>  // get uploaded (posted) file<br>  HttpPostedFile userFile = uploadedFiles[0]; <br><br> // get size of uploaded file <br>  int FileSize = userFile.ContentLength;<br> byte[] FileData = new Byte[FileSize]; <br>  userFile.InputStream.Read(FileData,0,FileSize); <br><br>  // get other arguments from post data<br>  string ConNum = Request.Form["CN1".ToString()]; <br>  string OrgNum = Request.Form["ON1".ToString()];<br>  string AmdNum = Request.Form["AN1".ToString()];<br>  string EffDate = Request.Form["ED1".ToString()]; // YYYYMMDD format<br> string FileName = userFile.FileName.ToString();<br>  <br>  // call the method with appropriate arguments and assign results <br>  filing = ProxySERVCON.FileContract(FileData,FileName,OrgNum, ConNum, AmdNum, EffDate, UserName );<br><br> // do something with the results<br> // note: if there are any errors the confirmation number will be <b>'Error'</b> <br> Response.Write("Confirmation Number is " + filing.ConfirmNum );<br> <br> // the filing object's errCodes will be 0 if no errors, 1 if there are errors, and -1 for warnings against possible typos <br> // if there are errors or warnings, the corresponding errMsg string will give an explanation.  <br> <br>  // e.g.  here we check if there is a warning about the Org Number <br> if (filing.errCodeOrgNum == -1 )  // there is a warning about the org number <br> { Reponse.Write(filing.errMsgOrgNum); } <br> 
      * 
      * @param fileName
      * @param comments
@@ -93,37 +95,5 @@ public interface SERVCONWebServiceSoap {
         String userName,
         @WebParam(name = "Comments", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
         String comments);
-
-    /**
-     * 
-     * @param fileName
-     * @param orgNum
-     * @param effDate
-     * @param fileData
-     * @param amdNum
-     * @param conNum
-     * @param userName
-     * @return
-     *     returns com.nyshex.servcon.service.ServiceContractFiling
-     */
-    @WebMethod(operationName = "FileContract", action = "http://www.fmc.gov/ServconWebServices/FileContract")
-    @WebResult(name = "FileContractResult", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
-    @RequestWrapper(localName = "FileContract", targetNamespace = "http://www.fmc.gov/ServconWebServices/", className = "com.nyshex.servcon.service.FileContract")
-    @ResponseWrapper(localName = "FileContractResponse", targetNamespace = "http://www.fmc.gov/ServconWebServices/", className = "com.nyshex.servcon.service.FileContractResponse")
-    public ServiceContractFiling fileContract(
-        @WebParam(name = "FileData", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
-        byte[] fileData,
-        @WebParam(name = "FileName", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
-        String fileName,
-        @WebParam(name = "OrgNum", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
-        String orgNum,
-        @WebParam(name = "ConNum", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
-        String conNum,
-        @WebParam(name = "AmdNum", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
-        String amdNum,
-        @WebParam(name = "EffDate", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
-        String effDate,
-        @WebParam(name = "UserName", targetNamespace = "http://www.fmc.gov/ServconWebServices/")
-        String userName);
 
 }
