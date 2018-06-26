@@ -30,14 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FileNotice }
-     * 
-     */
-    public FileNotice createFileNotice() {
-        return new FileNotice();
-    }
-
-    /**
      * Create an instance of {@link FileContractResponse }
      * 
      */
@@ -54,11 +46,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FileNoticeResponse }
+     * Create an instance of {@link FileContract }
      * 
      */
-    public FileNoticeResponse createFileNoticeResponse() {
-        return new FileNoticeResponse();
+    public FileContract createFileContract() {
+        return new FileContract();
     }
 
     /**
@@ -67,14 +59,6 @@ public class ObjectFactory {
      */
     public FileCorrectedCopy createFileCorrectedCopy() {
         return new FileCorrectedCopy();
-    }
-
-    /**
-     * Create an instance of {@link FileContract }
-     * 
-     */
-    public FileContract createFileContract() {
-        return new FileContract();
     }
 
     /**

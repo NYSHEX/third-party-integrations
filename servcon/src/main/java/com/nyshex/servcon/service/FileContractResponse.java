@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="FileContractResult" type="{http://www.fmc.gov/ServconWebServices/}ServiceContractFiling"/>
+ *         &lt;element name="FileContractResult" type="{http://www.fmc.gov/ServconWebServices/}ServiceContractFiling" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "FileContractResponse")
 public class FileContractResponse {
 
-    @XmlElement(name = "FileContractResult", required = true)
+    @XmlElement(name = "FileContractResult")
     protected ServiceContractFiling fileContractResult;
 
     /**

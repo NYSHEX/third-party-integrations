@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "SERVCONWebService", targetNamespace = "http://www.fmc.gov/ServconWebServices/", wsdlLocation = "file:/Users/matt/Code/third-party-integrations/servcon/SERVCONWebService.wsdl")
+@WebServiceClient(name = "SERVCONWebService", targetNamespace = "http://www.fmc.gov/ServconWebServices/", wsdlLocation = "file:/Users/matt/Code/third-party-integrations/servcon/SERVCONWebservice.wsdl")
 public class SERVCONWebService
     extends Service
 {
@@ -30,7 +30,7 @@ public class SERVCONWebService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/Users/matt/Code/third-party-integrations/servcon/SERVCONWebService.wsdl");
+            url = new URL("file:/Users/matt/Code/third-party-integrations/servcon/SERVCONWebservice.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
